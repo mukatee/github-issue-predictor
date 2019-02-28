@@ -1,0 +1,5 @@
+
+
+In the long run we want to support building all essential qt modules like we do now by invoking the qt5 configure script which in the end uses qmake.
+
+For now we could try adding a CMakeLists.txt file to the qt5 repo which would try to build qtbase and qtsvg, because those are the ones that were tested so far.
