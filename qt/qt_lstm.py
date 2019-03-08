@@ -48,41 +48,6 @@ df_2019["comp1_label"] = encoder.transform(df_2019["comp1"])
 
 features = df_2019["Description"]
 
-def load_data(text_data_dir, vocab_size, sequence_length, validation_split=0.2):
-    data = dict()
-    data["vocab_size"] = vocab_size
-    data["sequence_length"] = sequence_length
-
-    # second, prepare text samples and their labels
-    print('Processing text dataset')
-
-    texts = []  # list of text samples
-    labels_index = {}  # dictionary mapping label name to numeric id
-    labels = []  # list of label ids
-    for name in sorted(os.listdir(text_data_dir)):
-        path = os.path.join(text_data_dir, name)
-        if os.path.isdir(path):
-            label_id = len(labels_index)
-            labels_index[name] = label_id
-            for fname in sorted(os.listdir(path)):
-                if fname.isdigit():
-                    fpath = os.path.join(path, fname)
-                    if sys.version_info < (3,):
-                        f = open(fpath)
-                    else:
-                        f = open(fpath, encoding='latin-1')
-                    t = f.read()
-                    i = t.find('\n\n')  # skip header
-                    if 0 < i:
-                        t = t[i:]
-                    texts.append(t)
-                    f.close()
-                    labels.append(label_id)
-    print('Found %s texts.' % len(texts))
-    data["texts"] = texts
-    data["labels"] = labels
-    return data
-
 def load_word_vectors(glove_dir):
     print('Indexing word vectors.')
 
@@ -203,11 +168,11 @@ model.load_weights('lstm/model-lstm-11-epoch.hdf5')
 
 #model.save("newsgroup_model_word_embedding.h5")
 
-score, acc = model.evaluate(x=X_test,
-                            y=y_test,
-                            batch_size=128)
-print('Test loss:', score)
-print('Test accuracy:', acc)
+#score, acc = model.evaluate(x=X_test,
+#                            y=y_test,
+#                            batch_size=128)
+#print('Test loss:', score)
+#print('Test accuracy:', acc)
 
 #which integer matches which textual label/component name
 le_id_mapping = dict(zip(encoder.transform(encoder.classes_), encoder.classes_))

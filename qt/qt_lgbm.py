@@ -51,10 +51,11 @@ token_lists = list(features2)
 
 print("bi- and tri-gramming")
 
+common_terms = ["of", "with", "without", "and", "or", "the", "a"]
 #https://www.machinelearningplus.com/nlp/topic-modeling-gensim-python/
 # Build the bigram and trigram models
-bigram = gensim.models.Phrases(token_lists, min_count=5, threshold=100) # higher threshold fewer phrases.
-trigram = gensim.models.Phrases(bigram[token_lists], threshold=100)
+bigram = gensim.models.Phrases(token_lists, min_count=5, threshold=100, common_terms=common_terms) # higher threshold fewer phrases.
+trigram = gensim.models.Phrases(bigram[token_lists], threshold=100, common_terms=common_terms)
 
 # Faster way to get a sentence clubbed as a trigram/bigram
 bigram_mod = gensim.models.phrases.Phraser(bigram)

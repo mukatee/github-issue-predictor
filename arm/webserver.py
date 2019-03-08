@@ -1,7 +1,7 @@
 __author__ = 'teemu kanstren'
 
 from bottle import run, request, post, get
-from rf import predict_component
+from arm.rf import predict_component
 
 #for making predictions for given issue_id. load issue text from github, try to predict the component probabilities for it
 @post('/')
